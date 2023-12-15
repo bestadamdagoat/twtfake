@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: flex-start;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        form {
+            max-width: 400px;
+        }
+
+        .help-panel {
+            max-width: 300px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box; /* Ensure padding and border don't increase element width */
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #preview {
+            max-width: 400px;
+            margin-top: 20px; /* Add space between the form and the preview */
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        pre {
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Collapsible title style */
+        .collapsible-title {
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            background-color: #f1f1f1;
+        }
+
+        .collapsible-title:hover {
+            background-color: #ddd;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>URL Generator</h1>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Generate Your Custom URL</h2>
+            <form id="urlGeneratorForm">
+                <label for="fakelink">Fake Link:</label>
+                <input type="text" id="fakelink" name="fakelink" required><br>
+
+                <label for="reallink">Real Link:</label>
+                <input type="text" id="reallink" name="reallink" required><br>
+
+                <label for="useragent">User-Agent:</label>
+                <input type="text" id="useragent" name="useragent" placeholder="Enter User-Agent (e.g., Twitterbot)"><br>
+
+                <button type="button" onclick="generateURL()">Generate URL</button>
+            </form>
+        </div>
+        
+        <div class="help-panel">
+            <h2>Help</h2>
+            <p><strong>Options:</strong></p>
+            <p><strong>Fake Link:</strong> The URL you want to display.</p>
+            <p><strong>Real Link:</strong> The URL to which the user will be redirected.</p>
+            <div class="collapsible-title" onclick="toggleContent('userAgentList')">Popular User-Agents</div>
+            <div class="content" id="userAgentList">
+                <ul>
+                    <li>Twitterbot</li>
+                    <li>Discordbot</li>
+                    <!-- Add more user-agents as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="preview">
+        <h2>Preview</h2>
+        <!-- Preview content goes here -->
+    </div>
+
+    <script>
+        function generateURL() {
+            const fakelink = encodeURIComponent(document.getElementById('fakelink').value);
+            const reallink = encodeURIComponent(document.getElementById('reallink').value);
+            const useragent = encodeURIComponent(document.getElementById('useragent').value);
+
+            const url = `https://uatools.bestadamdagoat.com/?fakelink=${fakelink}&reallink=${reallink}&useragent=${useragent}`;
+
+            // Display the URL in the preview div
+            const previewDiv = document.getElementById('preview');
+            previewDiv.innerHTML = `
+                <h2>Preview</h2>
+                <p>Generated URL:</p>
+                <pre>${url}</pre>
+            `;
+        }
+
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
