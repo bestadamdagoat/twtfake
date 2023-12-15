@@ -11,3 +11,6 @@ Usage:
 shows `example.com/fake` on twitter
 
 shows `example.com/real` after clicking
+
+## hosting yourself
+i use cloudflare workers, just make sure to upload worker.js and nothing else
