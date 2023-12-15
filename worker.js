@@ -19,7 +19,7 @@ async function handleRequest(request) {
     }
   } else {
     // If no params are provided, redirect to specified page
-    return Response.redirect('https://github.com/bestadamdagoat/uatools', 301);
+    return Response.redirect('https://bestadamdagoat.com/uatools', 301);
   }
 }
 // https://url.com/?fakelink=https://example.com/fake&reallink=https://example.com/real&useragent=Twitterbot
