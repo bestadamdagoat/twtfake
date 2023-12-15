@@ -8,16 +8,15 @@ async function handleRequest(request) {
   const reallink = searchParams.get('reallink');
   const useragent = searchParams.get('useragent');
 
-  if (fakelink && reallink) {
-    if (useragent) {
-      // Check if the specified user-agent matches the request's user-agent
-      if (request.headers.get('User-Agent') === useragent) {
-        return Response.redirect(fakelink, 301);
-      }
+  if (fakelink && reallink && useragent) {
+    const userAgent = request.headers.get('User-Agent');
+    if (userAgent.includes(useragent)) {
+      // If the user-agent contains the specified string, redirect to fakelink
+      return Response.redirect(fakelink, 301);
+    } else {
+      // If the user-agent does not contain the specified string, redirect to reallink
+      return Response.redirect(reallink, 301);
     }
-
-    // If user-agent is not specified or doesn't match, redirect to reallink
-    return Response.redirect(reallink, 301);
   } else {
     // If no params are provided, redirect to specified page
     return Response.redirect('https://github.com/bestadamdagoat/uatools', 301);
